@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>hardwareSurvey</title>
+	</head>
+	<body>
+		<h1>hardwareSurvey</h1>
+	</body>
+		<p>INTENDED FOR SCHOOL CHROMEBOOKS ONLY<br>Go to "chrome://system"<br>Press Expand All<br>Press "ctrl+a" and "ctrl+c" to copy everything<br>Then click on the "get" button and allow access to clipboard</p>
+		<script>
+		let keys = ["CHROME VERSION","CHROMEOS_ARC_ANDROID_SDK_VERSION","CHROMEOS_ARC_DPC_VERSION","CHROMEOS_ARC_POLICY","CHROMEOS_ARC_POLICY_COMPLIANCE_REPORT","CHROMEOS_ARC_STATUS","CHROMEOS_ARC_VERSION","CHROMEOS_AUSERVER","CHROMEOS_BLUETOOTH_FLOSS","CHROMEOS_BOARD_APPID","CHROMEOS_CANARY_APPID","CHROMEOS_DEVSERVER","CHROMEOS_FIRMWARE_VERSION","CHROMEOS_RELEASE_APPID","CHROMEOS_RELEASE_BOARD","CHROMEOS_RELEASE_BRANCH_NUMBER","CHROMEOS_RELEASE_BUILDER_PATH","CHROMEOS_RELEASE_BUILD_NUMBER","CHROMEOS_RELEASE_BUILD_TYPE","CHROMEOS_RELEASE_CHROME_MILESTONE","CHROMEOS_RELEASE_DESCRIPTION","CHROMEOS_RELEASE_KEYSET","CHROMEOS_RELEASE_NAME","CHROMEOS_RELEASE_PATCH_NUMBER","CHROMEOS_RELEASE_TRACK","CHROMEOS_RELEASE_UNIBUILD","CHROMEOS_RELEASE_VERSION","CLIENT_ID","ENTERPRISE_ENROLLED","GOOGLE_RELEASE","HWID","LOGDATE","Local State: settings","ONBOARDING_TIME","Profile[0] chrome_user_log","Profile[0] chrome_user_log.PREVIOUS","Profile[0] libassistant_user_log","Profile[0] login-times","Profile[0] logout-times","TOUCHPAD_PID","TOUCHPAD_VENDOR","UI Hierarchy: Layers","UI Hierarchy: Views","UI Hierarchy: Windows","about_sync_data","account_type","alsa controls","amdgpu_gem_info","amdgpu_gtt_mm","amdgpu_vram_mm","android_app_storage","atmel_tp_deltas","atmel_tp_refs","atmel_ts_deltas","atmel_ts_refs","atrus_logs","audio_diagnostics","audit_log","authpolicy","bio_crypto_init.LATEST","bio_crypto_init.PREVIOUS","bio_fw_updater.LATEST","bio_fw_updater.PREVIOUS","biod.LATEST","biod.PREVIOUS","bios_info","bios_log","bios_stacked_times","bios_times","blkid","bluetooth.log","bootstat_summary","bt_usb_disconnects","buddyinfo","cbi_info","cheets_log","chrome_system_log","chrome_system_log.PREVIOUS","chromeos-pgmem","clobber-state.log","clobber.log","console-ramoops","cpuinfo","cr50_version","cras","cros_ec.log","cros_ec.previous","cros_ec_panicinfo","cros_ec_pdinfo","cros_fp.log","cros_fp.previous","cros_fp_panicinfo","cros_ish.log","cros_ish.previous","cros_scp.log","cros_scp.previous","cros_tp console","cros_tp frame","cros_tp version","crosid","crostini","crosvm.log","dbus_details","dbus_summary","demo_mode_config","device_event_log","disk_usage","display-debug","dmesg","drm_gem_objects","drm_state","drm_trace","drm_trace_legacy","ec_info","edid-decode","env","eventlog","extensions","folder_size_dump","font_info","framebuffer","fwupd_state","hack-33025-touchpad","hack-33025-touchpad_activity","hack-33025-touchscreen_activity","hammerd","hardware_class","hardware_verification_report","hostname","hypervisor.log","i915_error_state","i915_gem_gtt","i915_gem_objects","ifconfig","input_devices","interrupts","iw_list","kbmcu_info","kernel-crashes","lacros_status","logcat","lpstat","lsblk","lsmod","lspci","lsusb","lvs","mali_memory","mem_usage","mem_usage_with_title","memd clips","memd.parameters","meminfo","memory_spd_info","mm-esim-status","mm-status","modetest","monitor_info","mount-encrypted","mountinfo","netlog","netstat","network-diagnostics","network-health-snapshot","network_devices","network_event_log","network_services","nvmap_iovmm","oemdata","os-release BUG_REPORT_URL","os-release BUILD_ID","os-release GOOGLE_CRASH_ID","os-release HOME_URL","os-release ID","os-release ID_LIKE","os-release NAME","os-release VERSION","os-release VERSION_ID","pagetypeinfo","pchg_info","platform_identity_customization_id","platform_identity_model","platform_identity_name","platform_identity_sku","platform_identity_whitelabel_tag","power_supply_info","power_supply_sysfs","powerd.LATEST","powerd.PREVIOUS","powerd.out","powerwash_count","ps","pvs","qcom_fw_info","routes","routes6","sensor_info","slabinfo","stateful_trim_data","stateful_trim_state","storage_info","swap_info","syslog","system_log_stats","threads","tlsdate","top memory","top thread","touch_fw_version","tpm-firmware-updater","tpm_version","traffic-counters","typec_connector_class","typecd","ui_log","uname","update_engine.log","upstart","uptime","usb4 devices","user_folder_size_dump","verified boot","vmlog.1.LATEST","vmlog.1.PREVIOUS","vmlog.LATEST","vmlog.PREVIOUS","vmstat","vpd_2.0","wakeup_sources","wifi_status_no_anonymize","zram block device stat names","zram block device stat values","zram new stats names","zram new stats values"];
+			function get(){
+				navigator.clipboard.readText()
+  				.then(text => {
+				    console.log('Pasted content: ', text.length);
+					parseS(text);
+				  })
+				  .catch(err => {
+				    console.error('Failed to read clipboard contents: ', err);
+				  });
+			}
+			async function parseS(text){
+				let x = {};
+				let tx = text.split('\n');
+				let ck = "";
+				let cn = 0;
+				for(let i in tx){
+					if(keys.indexOf(tx[i]) != -1){
+						x[tx[i]] = "";
+						cn = 0;
+						ck = tx[i];
+					} else {
+						if(cn == 1){
+							x[ck]+="\n";
+						}
+						cn=1;
+						x[ck] += tx[i];
+					}
+				}
+				let vals = ['CHROME VERSION', 'CHROMEOS_FIRMWARE_VERSION', 'CHROMEOS_BOARD_APPID', 'GOOGLE_RELEASE', 'CHROMEOS_RELEASE_DESCRIPTION', 'CHROMEOS_RELEASE_BOARD', 'HWID', 'LOGDATE', 'ONBOARDING_TIME', 'account_type', 'ifconfig', 'monitor_info', 'uname', 'platform_identity_name', 'platform_identity_model', 'ENTERPRISE_ENROLLED', 'network_devices', 'network_services', 'power_supply_info', 'os-release BUILD_ID', 'os-release GOOGLE_CRASH_ID', 'oemdata', 'meminfo', 'lsusb'];
+				let fx = {};
+				for(let i in vals){
+					fx[vals[i]] = x[vals[i]];
+				}
+				if(fx["CHROME VERSION"] == undefined){
+					alert("you seem to not have copied the correct information\nTry again.");
+					return false;
+				}
+				console.log(fx);
+				let rawResponse = await fetch('/collect', {
+					method: 'POST',
+					headers: {
+					  'Accept': 'application/json',
+					  'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(fx)
+				  });
+				rawResponse = await rawResponse.text();
+				document.write(rawResponse);
+			}
+		</script>
+		<button onclick="get();">get</button>
+</html>
